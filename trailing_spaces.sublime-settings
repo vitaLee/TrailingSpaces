@@ -4,7 +4,10 @@
 
 	// Max file size to search
 	"trailing_spaces_file_max_size"   : 1048576,
-
+	
+	// Don't delete lines containing only whitespace
+	"ignore_whitespace_only_lines"	: true,
+	
 	// By default plugin is enabled or disabled (true|false)
 	"trailing_spaces_enabled"         : true
 }
