@@ -23,6 +23,7 @@ import sublime_plugin
 DEFAULT_MAX_FILE_SIZE = 1048576
 DEFAULT_COLOR_SCOPE_NAME = "invalid"
 DEFAULT_IS_ENABLED = True
+DEFAULT_IGNORE_WHITESPACE_ONLY_LINES = True
 
 #Set whether the plugin is on or off
 ts_settings = sublime.load_settings('trailing_spaces.sublime-settings')
@@ -32,7 +33,10 @@ trailing_spaces_enabled = bool(ts_settings.get('trailing_spaces_enabled',
 
 # Return an array of regions matching trailing spaces.
 def find_trailing_spaces(view):
-    return view.find_all('[ \t]+$')
+    ignore_whitespace_only_lines = ts_settings.get('ignore_whitespace_only_lines', 
+                                                    DEFAULT_IGNORE_WHITESPACE_ONLY_LINES)
+    sel = '(?<=\S)[ \t]+$' if ignore_whitespace_only_lines else '[ \t]+$'
+    return view.find_all(sel)
 
 
 # Highlight trailing spaces
